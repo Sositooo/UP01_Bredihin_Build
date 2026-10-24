@@ -1,0 +1,49 @@
+<Page x:Class="Build.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Авторизация" Tag="root">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource Card}" Width="420" Margin="0,24" Padding="32"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <Image Source="/res/logo.png" Width="110" Height="110" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <TextBlock Text="Build" Style="{StaticResource Heading}" HorizontalAlignment="Center"/>
+                <TextBlock Text="Аренда строительной и специальной техники" TextWrapping="Wrap"
+                           TextAlignment="Center" Margin="0,4,0,24"
+                           Foreground="{DynamicResource MutedBrush}"/>
+
+                <!-- ФОРМА ВХОДА (прячется, когда показывается капча) -->
+                <StackPanel x:Name="LoginPanel">
+                    <TextBox x:Name="TbLogin" Tag="Логин" ToolTip="Введите логин (английские буквы и цифры)"/>
+                    <Grid Margin="0,0,0,20">
+                        <PasswordBox x:Name="PassBox" ToolTip="Введите пароль" PasswordChanged="Pass_Changed"/>
+                        <TextBlock Text="Пароль" Style="{StaticResource HintText}"/>
+                    </Grid>
+                    <Button x:Name="BtnEnter" Content="Войти" ToolTip="Войти в приложение"
+                            IsDefault="True" Click="BtnEnter_Click"/>
+                    <Button x:Name="BtnReg" Content="Регистрация" ToolTip="Создать новую учётную запись"
+                            Style="{StaticResource OutlineButton}" Click="BtnReg_Click"/>
+                    <Button x:Name="BtnChange" Content="Смена пароля" ToolTip="Сменить пароль от учётной записи"
+                            Style="{StaticResource OutlineButton}" Click="BtnChange_Click"/>
+                </StackPanel>
+
+                <!-- КАПЧА: появляется после 3 неверных попыток входа -->
+                <StackPanel x:Name="CaptchaPanel" Visibility="Collapsed">
+                    <TextBlock Text="Слишком много неверных попыток. Введите символы с картинки:"
+                               TextWrapping="Wrap" Margin="0,0,0,10"/>
+                    <Border Background="{DynamicResource BgBrush}" CornerRadius="8" Padding="10" Margin="0,0,0,12">
+                        <!-- TextBlock нельзя выделить мышью, значит капчу не получится скопировать -->
+                        <TextBlock x:Name="CaptchaText" FontSize="32" FontWeight="Bold" FontStyle="Italic"
+                                   TextAlignment="Center" TextDecorations="Strikethrough"
+                                   Foreground="{DynamicResource DangerBrush}"/>
+                    </Border>
+                    <TextBox x:Name="TbCaptcha" Tag="Введите капчу" ToolTip="Введите символы с картинки вручную"/>
+                    <Button x:Name="BtnCaptchaOk" Content="Подтвердить" ToolTip="Проверить капчу"
+                            Click="BtnCaptchaOk_Click"/>
+                    <Button x:Name="BtnCaptchaNew" Content="Обновить" ToolTip="Показать другую капчу"
+                            Style="{StaticResource OutlineButton}" Click="BtnCaptchaNew_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

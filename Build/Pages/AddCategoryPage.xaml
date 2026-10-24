@@ -1,0 +1,29 @@
+<Page x:Class="Build.Pages.AddCategoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Категория">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource Card}" Width="460" Margin="0,24" Padding="32"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Данные категории" Style="{StaticResource Heading}" FontSize="22" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Название категории" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TbName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                         Tag="Например, Экскаваторы" ToolTip="Название категории (до 100 символов)" MaxLength="100"/>
+
+                <TextBlock Text="Описание (необязательно)" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TbDescription" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                         Height="100" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top"
+                         Padding="12,10" Tag="Краткое описание категории" MaxLength="300"
+                         ToolTip="Описание категории (до 300 символов)"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
+                    <Button Content="Сохранить" ToolTip="Сохранить данные" Click="BtnSave_Click"/>
+                    <Button Content="Очистить" Style="{StaticResource OutlineButton}"
+                            ToolTip="Очистить поля формы" Click="BtnClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

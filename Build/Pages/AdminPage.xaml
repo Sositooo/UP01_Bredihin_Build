@@ -1,0 +1,50 @@
+<Page x:Class="Build.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Панель администратора" Tag="root">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24" VerticalAlignment="Center">
+            <TextBlock x:Name="WelcomeText" Style="{StaticResource Heading}" HorizontalAlignment="Center"/>
+            <TextBlock Text="Выберите раздел для работы" Margin="0,4,0,24" HorizontalAlignment="Center"
+                       Foreground="{DynamicResource MutedBrush}"/>
+
+            <WrapPanel HorizontalAlignment="Center" MaxWidth="800">
+                <Button Style="{StaticResource TileButton}" ToolTip="Таблица пользователей: добавление, изменение, удаление"
+                        Click="BtnUsers_Click">
+                    <StackPanel>
+                        <TextBlock Text="👥" FontSize="42" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Пользователи" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource TileButton}" ToolTip="Справочник категорий техники"
+                        Click="BtnCategories_Click">
+                    <StackPanel>
+                        <TextBlock Text="🗂" FontSize="42" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Категории" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource TileButton}" ToolTip="Таблица техники: добавление, изменение, удаление"
+                        Click="BtnMachines_Click">
+                    <StackPanel>
+                        <TextBlock Text="🚜" FontSize="42" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Техника" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource TileButton}" ToolTip="Диаграммы и выгрузка отчётов в Word, PDF и Excel"
+                        Click="BtnDiagram_Click">
+                    <StackPanel>
+                        <TextBlock Text="📊" FontSize="42" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Диаграммы и отчёты" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource TileButton}" ToolTip="Каталог техники, каким его видит клиент"
+                        Click="BtnCatalog_Click">
+                    <StackPanel>
+                        <TextBlock Text="🔍" FontSize="42" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Каталог техники" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

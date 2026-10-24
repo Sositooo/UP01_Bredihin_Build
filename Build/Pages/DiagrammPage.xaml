@@ -1,0 +1,40 @@
+<Page x:Class="Build.Pages.DiagrammPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      Title="Диаграммы и отчёты">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ВЕРХНЯЯ СТРОКА: что показывать, какой тип диаграммы, кнопки выгрузки -->
+        <Border Grid.Row="0" Style="{StaticResource Card}" Padding="16,16,16,4" Margin="0,0,0,16">
+            <WrapPanel>
+                <ComboBox x:Name="MetricBox" Width="330" Margin="0,0,12,12"
+                          ToolTip="Что показывать на диаграмме" SelectionChanged="UpdateChart"/>
+                <ComboBox x:Name="TypeBox" Width="190" Margin="0,0,12,12"
+                          ToolTip="Тип диаграммы" SelectionChanged="UpdateChart"/>
+                <Button Content="Экспорт в Word" Margin="0,0,12,12"
+                        ToolTip="Создать отчёт по технике в Word (.docx) и PDF на рабочем столе"
+                        Click="ExportWord_Click"/>
+                <Button Content="Экспорт в Excel" Margin="0,0,12,12"
+                        ToolTip="Выгрузить таблицу техники в Excel (.xlsx) на рабочий стол"
+                        Click="ExportExcel_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- ДИАГРАММА (Chart из Windows Forms показываем через WindowsFormsHost) -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="12">
+            <wfi:WindowsFormsHost>
+                <charts:Chart x:Name="ChartMachines">
+                    <charts:Chart.Legends>
+                        <charts:Legend/>
+                    </charts:Chart.Legends>
+                </charts:Chart>
+            </wfi:WindowsFormsHost>
+        </Border>
+    </Grid>
+</Page>

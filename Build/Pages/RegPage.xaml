@@ -1,0 +1,38 @@
+<Page x:Class="Build.Pages.RegPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Регистрация">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource Card}" Width="440" Margin="0,24" Padding="32"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Новая учётная запись" Style="{StaticResource Heading}" FontSize="22" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Логин" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TbLogin" Tag="Например, ivanov_s" ToolTip="Логин: 3–20 символов, английские буквы, цифры и _"/>
+
+                <TextBlock Text="ФИО" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TbFio" Tag="Иванов Иван Иванович" ToolTip="ФИО русскими буквами"/>
+
+                <TextBlock Text="Пароль" Style="{StaticResource FieldLabel}"/>
+                <Grid Margin="0,0,0,12">
+                    <PasswordBox x:Name="PassBox" ToolTip="Минимум 6 символов, английская раскладка, хотя бы одна цифра"
+                                 PasswordChanged="Pass_Changed"/>
+                    <TextBlock Text="Придумайте пароль" Style="{StaticResource HintText}"/>
+                </Grid>
+
+                <TextBlock Text="Подтверждение пароля" Style="{StaticResource FieldLabel}"/>
+                <Grid Margin="0,0,0,12">
+                    <PasswordBox x:Name="PassBox2" ToolTip="Повторите пароль" PasswordChanged="Pass_Changed"/>
+                    <TextBlock Text="Повторите пароль" Style="{StaticResource HintText}"/>
+                </Grid>
+
+                <TextBlock Text="Роль" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="RoleBox" DisplayMemberPath="Name" ToolTip="Выберите роль"/>
+
+                <Button x:Name="BtnReg" Content="Зарегистрироваться" Margin="6,12,6,6"
+                        ToolTip="Создать учётную запись" Click="BtnReg_Click"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

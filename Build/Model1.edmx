@@ -1,0 +1,972 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище BuildModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClientType" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="DocumentData" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RequestId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ManagerId" Type="int" Nullable="false" />
+          <Property Name="SignedAt" Type="datetime" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HandoverActs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="MachineId" Type="int" Nullable="false" />
+          <Property Name="ActType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ActDate" Type="datetime" Nullable="false" />
+          <Property Name="ManagerId" Type="int" Nullable="false" />
+          <Property Name="ConditionState" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="300" />
+          <Property Name="ExtraCharge" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MachineCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InventoryNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="ManufactureYear" Type="int" />
+          <Property Name="DailyPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DepositAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="MinRentDays" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="PhotoUrl" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PaidAt" Type="datetime" Nullable="false" />
+          <Property Name="IsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="AccountantId" Type="int" />
+        </EntityType>
+        <EntityType Name="RentalRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ManagerId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="RentStart" Type="date" Nullable="false" />
+          <Property Name="RentEnd" Type="date" Nullable="false" />
+          <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RejectReason" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="RequestItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestId" Type="int" Nullable="false" />
+          <Property Name="MachineId" Type="int" Nullable="false" />
+          <Property Name="DailyPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Clients__UserId__412EB0B6">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Clien__5EBF139D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Manag__5FB337D6">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Reque__5DCAEF64">
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RentalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HandoverA__Contr__6EF57B66">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="HandoverActs" Type="Self.HandoverActs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandoverActs">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HandoverA__Machi__6FE99F9F">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="HandoverActs" Type="Self.HandoverActs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandoverActs">
+              <PropertyRef Name="MachineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HandoverA__Manag__72C60C4A">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="HandoverActs" Type="Self.HandoverActs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandoverActs">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Machines__Catego__45F365D3">
+          <End Role="MachineCategories" Type="Self.MachineCategories" Multiplicity="1" />
+          <End Role="Machines" Type="Self.Machines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Machines">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Accoun__6C190EBB">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="AccountantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Contra__6754599E">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalReq__Clien__4F7CD00D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RentalRequests">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalReq__Manag__5070F446">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RentalRequests">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestIt__Machi__59063A47">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="RequestItems" Type="Self.RequestItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestItems">
+              <PropertyRef Name="MachineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestIt__Reque__5812160E">
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="1" />
+          <End Role="RequestItems" Type="Self.RequestItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RentalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestItems">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__3E52440B">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BuildModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HandoverActs" EntityType="Self.HandoverActs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachineCategories" EntityType="Self.MachineCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Machines" EntityType="Self.Machines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentalRequests" EntityType="Self.RentalRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestItems" EntityType="Self.RequestItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clients__UserId__412EB0B6" Association="Self.FK__Clients__UserId__412EB0B6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Clien__5EBF139D" Association="Self.FK__Contracts__Clien__5EBF139D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Manag__5FB337D6" Association="Self.FK__Contracts__Manag__5FB337D6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Reque__5DCAEF64" Association="Self.FK__Contracts__Reque__5DCAEF64">
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HandoverA__Contr__6EF57B66" Association="Self.FK__HandoverA__Contr__6EF57B66">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="HandoverActs" EntitySet="HandoverActs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HandoverA__Machi__6FE99F9F" Association="Self.FK__HandoverA__Machi__6FE99F9F">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="HandoverActs" EntitySet="HandoverActs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HandoverA__Manag__72C60C4A" Association="Self.FK__HandoverA__Manag__72C60C4A">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="HandoverActs" EntitySet="HandoverActs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Machines__Catego__45F365D3" Association="Self.FK__Machines__Catego__45F365D3">
+            <End Role="MachineCategories" EntitySet="MachineCategories" />
+            <End Role="Machines" EntitySet="Machines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Accoun__6C190EBB" Association="Self.FK__Payments__Accoun__6C190EBB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Contra__6754599E" Association="Self.FK__Payments__Contra__6754599E">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalReq__Clien__4F7CD00D" Association="Self.FK__RentalReq__Clien__4F7CD00D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalReq__Manag__5070F446" Association="Self.FK__RentalReq__Manag__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestIt__Machi__59063A47" Association="Self.FK__RequestIt__Machi__59063A47">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="RequestItems" EntitySet="RequestItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestIt__Reque__5812160E" Association="Self.FK__RequestIt__Reque__5812160E">
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+            <End Role="RequestItems" EntitySet="RequestItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__3E52440B" Association="Self.FK__Users__RoleId__3E52440B">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BuildModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentData" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Clients__UserId__412EB0B6" FromRole="Clients" ToRole="Users" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Clien__5EBF139D" FromRole="Clients" ToRole="Contracts" />
+          <NavigationProperty Name="RentalRequests" Relationship="Self.FK__RentalReq__Clien__4F7CD00D" FromRole="Clients" ToRole="RentalRequests" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ManagerId" Type="Int32" Nullable="false" />
+          <Property Name="SignedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Contracts__Clien__5EBF139D" FromRole="Contracts" ToRole="Clients" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Contracts__Manag__5FB337D6" FromRole="Contracts" ToRole="Users" />
+          <NavigationProperty Name="RentalRequests" Relationship="Self.FK__Contracts__Reque__5DCAEF64" FromRole="Contracts" ToRole="RentalRequests" />
+          <NavigationProperty Name="HandoverActs" Relationship="Self.FK__HandoverA__Contr__6EF57B66" FromRole="Contracts" ToRole="HandoverActs" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Contra__6754599E" FromRole="Contracts" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="HandoverActs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="MachineId" Type="Int32" Nullable="false" />
+          <Property Name="ActType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ManagerId" Type="Int32" Nullable="false" />
+          <Property Name="ConditionState" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraCharge" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__HandoverA__Contr__6EF57B66" FromRole="HandoverActs" ToRole="Contracts" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK__HandoverA__Machi__6FE99F9F" FromRole="HandoverActs" ToRole="Machines" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__HandoverA__Manag__72C60C4A" FromRole="HandoverActs" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MachineCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK__Machines__Catego__45F365D3" FromRole="MachineCategories" ToRole="Machines" />
+        </EntityType>
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InventoryNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ManufactureYear" Type="Int32" />
+          <Property Name="DailyPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DepositAmount" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="MinRentDays" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HandoverActs" Relationship="Self.FK__HandoverA__Machi__6FE99F9F" FromRole="Machines" ToRole="HandoverActs" />
+          <NavigationProperty Name="MachineCategories" Relationship="Self.FK__Machines__Catego__45F365D3" FromRole="Machines" ToRole="MachineCategories" />
+          <NavigationProperty Name="RequestItems" Relationship="Self.FK__RequestIt__Machi__59063A47" FromRole="Machines" ToRole="RequestItems" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaidAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="AccountantId" Type="Int32" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Payments__Contra__6754599E" FromRole="Payments" ToRole="Contracts" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Payments__Accoun__6C190EBB" FromRole="Payments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="RentalRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ManagerId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RentEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RejectReason" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__RentalReq__Clien__4F7CD00D" FromRole="RentalRequests" ToRole="Clients" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Reque__5DCAEF64" FromRole="RentalRequests" ToRole="Contracts" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__RentalReq__Manag__5070F446" FromRole="RentalRequests" ToRole="Users" />
+          <NavigationProperty Name="RequestItems" Relationship="Self.FK__RequestIt__Reque__5812160E" FromRole="RentalRequests" ToRole="RequestItems" />
+        </EntityType>
+        <EntityType Name="RequestItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestId" Type="Int32" Nullable="false" />
+          <Property Name="MachineId" Type="Int32" Nullable="false" />
+          <Property Name="DailyPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK__RequestIt__Machi__59063A47" FromRole="RequestItems" ToRole="Machines" />
+          <NavigationProperty Name="RentalRequests" Relationship="Self.FK__RequestIt__Reque__5812160E" FromRole="RequestItems" ToRole="RentalRequests" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__3E52440B" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Clients__UserId__412EB0B6" FromRole="Users" ToRole="Clients" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Manag__5FB337D6" FromRole="Users" ToRole="Contracts" />
+          <NavigationProperty Name="HandoverActs" Relationship="Self.FK__HandoverA__Manag__72C60C4A" FromRole="Users" ToRole="HandoverActs" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Accoun__6C190EBB" FromRole="Users" ToRole="Payments" />
+          <NavigationProperty Name="RentalRequests" Relationship="Self.FK__RentalReq__Manag__5070F446" FromRole="Users" ToRole="RentalRequests" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleId__3E52440B" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK__Clients__UserId__412EB0B6">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Clien__5EBF139D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalReq__Clien__4F7CD00D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RentalRequests">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Manag__5FB337D6">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Reque__5DCAEF64">
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RentalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HandoverA__Contr__6EF57B66">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="HandoverActs" Type="Self.HandoverActs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandoverActs">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Contra__6754599E">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HandoverA__Machi__6FE99F9F">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="HandoverActs" Type="Self.HandoverActs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandoverActs">
+              <PropertyRef Name="MachineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HandoverA__Manag__72C60C4A">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="HandoverActs" Type="Self.HandoverActs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HandoverActs">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Machines__Catego__45F365D3">
+          <End Role="MachineCategories" Type="Self.MachineCategories" Multiplicity="1" />
+          <End Role="Machines" Type="Self.Machines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Machines">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestIt__Machi__59063A47">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="RequestItems" Type="Self.RequestItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestItems">
+              <PropertyRef Name="MachineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Accoun__6C190EBB">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="AccountantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalReq__Manag__5070F446">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RentalRequests">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RequestIt__Reque__5812160E">
+          <End Role="RentalRequests" Type="Self.RentalRequests" Multiplicity="1" />
+          <End Role="RequestItems" Type="Self.RequestItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RentalRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestItems">
+              <PropertyRef Name="RequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__3E52440B">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BuildEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" />
+          <EntitySet Name="HandoverActs" EntityType="Self.HandoverActs" />
+          <EntitySet Name="MachineCategories" EntityType="Self.MachineCategories" />
+          <EntitySet Name="Machines" EntityType="Self.Machines" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="RentalRequests" EntityType="Self.RentalRequests" />
+          <EntitySet Name="RequestItems" EntityType="Self.RequestItems" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Clients__UserId__412EB0B6" Association="Self.FK__Clients__UserId__412EB0B6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Clien__5EBF139D" Association="Self.FK__Contracts__Clien__5EBF139D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalReq__Clien__4F7CD00D" Association="Self.FK__RentalReq__Clien__4F7CD00D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Manag__5FB337D6" Association="Self.FK__Contracts__Manag__5FB337D6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Reque__5DCAEF64" Association="Self.FK__Contracts__Reque__5DCAEF64">
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HandoverA__Contr__6EF57B66" Association="Self.FK__HandoverA__Contr__6EF57B66">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="HandoverActs" EntitySet="HandoverActs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Contra__6754599E" Association="Self.FK__Payments__Contra__6754599E">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HandoverA__Machi__6FE99F9F" Association="Self.FK__HandoverA__Machi__6FE99F9F">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="HandoverActs" EntitySet="HandoverActs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HandoverA__Manag__72C60C4A" Association="Self.FK__HandoverA__Manag__72C60C4A">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="HandoverActs" EntitySet="HandoverActs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Machines__Catego__45F365D3" Association="Self.FK__Machines__Catego__45F365D3">
+            <End Role="MachineCategories" EntitySet="MachineCategories" />
+            <End Role="Machines" EntitySet="Machines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestIt__Machi__59063A47" Association="Self.FK__RequestIt__Machi__59063A47">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="RequestItems" EntitySet="RequestItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Accoun__6C190EBB" Association="Self.FK__Payments__Accoun__6C190EBB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalReq__Manag__5070F446" Association="Self.FK__RentalReq__Manag__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RequestIt__Reque__5812160E" Association="Self.FK__RequestIt__Reque__5812160E">
+            <End Role="RentalRequests" EntitySet="RentalRequests" />
+            <End Role="RequestItems" EntitySet="RequestItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__3E52440B" Association="Self.FK__Users__RoleId__3E52440B">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BuildModelContainer" CdmEntityContainer="BuildEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BuildModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DocumentData" ColumnName="DocumentData" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="BuildModel.Contracts">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="SignedAt" ColumnName="SignedAt" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HandoverActs">
+            <EntityTypeMapping TypeName="BuildModel.HandoverActs">
+              <MappingFragment StoreEntitySet="HandoverActs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+                <ScalarProperty Name="ActType" ColumnName="ActType" />
+                <ScalarProperty Name="ActDate" ColumnName="ActDate" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="ConditionState" ColumnName="ConditionState" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ExtraCharge" ColumnName="ExtraCharge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachineCategories">
+            <EntityTypeMapping TypeName="BuildModel.MachineCategories">
+              <MappingFragment StoreEntitySet="MachineCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machines">
+            <EntityTypeMapping TypeName="BuildModel.Machines">
+              <MappingFragment StoreEntitySet="Machines">
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ManufactureYear" ColumnName="ManufactureYear" />
+                <ScalarProperty Name="DailyPrice" ColumnName="DailyPrice" />
+                <ScalarProperty Name="DepositAmount" ColumnName="DepositAmount" />
+                <ScalarProperty Name="MinRentDays" ColumnName="MinRentDays" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="BuildModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="PaidAt" ColumnName="PaidAt" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="AccountantId" ColumnName="AccountantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentalRequests">
+            <EntityTypeMapping TypeName="BuildModel.RentalRequests">
+              <MappingFragment StoreEntitySet="RentalRequests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="RentStart" ColumnName="RentStart" />
+                <ScalarProperty Name="RentEnd" ColumnName="RentEnd" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestItems">
+            <EntityTypeMapping TypeName="BuildModel.RequestItems">
+              <MappingFragment StoreEntitySet="RequestItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+                <ScalarProperty Name="DailyPrice" ColumnName="DailyPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BuildModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BuildModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BuildModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,82 @@
+<Page x:Class="Build.Pages.AddMachinePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Техника">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource Card}" Width="780" Margin="0,24" Padding="32"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Данные техники" Style="{StaticResource Heading}" FontSize="22" Margin="0,0,0,20"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="24"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ЛЕВАЯ КОЛОНКА -->
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Название" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                 Tag="Например, Экскаватор гусеничный" MaxLength="150" ToolTip="Название техники"/>
+
+                        <TextBlock Text="Модель" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbModel" Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"
+                                 Tag="Например, CAT 320" MaxLength="100" ToolTip="Модель техники"/>
+
+                        <TextBlock Text="Инвентарный номер" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbInventory" Text="{Binding InventoryNumber, UpdateSourceTrigger=PropertyChanged}"
+                                 Tag="Формат: EX-001" MaxLength="30"
+                                 ToolTip="Две латинские буквы, дефис и три цифры, например EX-001"/>
+
+                        <TextBlock Text="Категория" Style="{StaticResource FieldLabel}"/>
+                        <ComboBox x:Name="CategoryBox" DisplayMemberPath="Name" SelectedValuePath="Id"
+                                  SelectedValue="{Binding CategoryId}" ToolTip="Выберите категорию техники"/>
+
+                        <TextBlock Text="Состояние" Style="{StaticResource FieldLabel}"/>
+                        <ComboBox x:Name="StatusBox" SelectedValuePath="Content" SelectedValue="{Binding Status}"
+                                  ToolTip="Выберите состояние техники">
+                            <ComboBoxItem Content="Исправна"/>
+                            <ComboBoxItem Content="На обслуживании"/>
+                            <ComboBoxItem Content="Списана"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- ПРАВАЯ КОЛОНКА -->
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Год выпуска (необязательно)" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbYear" Text="{Binding ManufactureYear, Mode=OneTime}"
+                                 Tag="От 1980 до текущего года" MaxLength="4" ToolTip="Год выпуска, 4 цифры"/>
+
+                        <TextBlock Text="Цена за сутки, ₽" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbPrice" Text="{Binding DailyPrice, StringFormat=F0, Mode=OneTime}"
+                                 Tag="От 100 до 1 000 000" MaxLength="7" ToolTip="Стоимость аренды за сутки"/>
+
+                        <TextBlock Text="Залог, ₽" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbDeposit" Text="{Binding DepositAmount, StringFormat=F0, Mode=OneTime}"
+                                 Tag="От 0 до 5 000 000" MaxLength="7" ToolTip="Сумма залога"/>
+
+                        <TextBlock Text="Минимальный срок аренды, дней" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbDays" Text="{Binding MinRentDays, Mode=OneTime}"
+                                 Tag="От 1 до 365" MaxLength="3" ToolTip="Минимальное количество суток аренды"/>
+
+                        <TextBlock Text="Описание (необязательно)" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbDescription" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="40" Tag="Краткое описание" MaxLength="300" ToolTip="Описание (до 300 символов)"/>
+
+                        <TextBlock Text="Ссылка на фото (необязательно)" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="TbPhoto" Text="{Binding PhotoUrl, UpdateSourceTrigger=PropertyChanged}"
+                                 Tag="https://... .jpg" MaxLength="500" ToolTip="Прямая ссылка на изображение техники"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
+                    <Button Content="Сохранить" ToolTip="Сохранить данные" Click="BtnSave_Click"/>
+                    <Button Content="Очистить" Style="{StaticResource OutlineButton}"
+                            ToolTip="Очистить поля формы" Click="BtnClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

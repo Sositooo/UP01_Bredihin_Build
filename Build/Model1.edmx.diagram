@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="89bec693d6e94bd3b993d67e419beb34" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="BuildModel.Clients" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.Contracts" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.HandoverActs" Width="1.5" PointX="12.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.MachineCategories" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.Machines" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.Payments" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.RentalRequests" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.RequestItems" Width="1.5" PointX="15.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.Roles" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildModel.Users" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="BuildModel.FK__Clients__UserId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Contracts__Clien__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__RentalReq__Clien__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Contracts__Manag__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Contracts__Reque__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__HandoverA__Contr__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Payments__Contra__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__HandoverA__Machi__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__HandoverA__Manag__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Machines__Catego__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__RequestIt__Machi__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Payments__Accoun__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__RentalReq__Manag__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__RequestIt__Reque__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildModel.FK__Users__RoleId__3E52440B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

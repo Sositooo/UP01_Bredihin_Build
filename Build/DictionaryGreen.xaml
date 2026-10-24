@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!-- Стили элементов (кнопки, поля, таблицы) общие для обеих тем -->
+        <ResourceDictionary Source="Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- ЦВЕТА ТЕМЫ -->
+    <SolidColorBrush x:Key="BgBrush"           Color="#EEF5EF"/>   <!-- фон окна -->
+    <SolidColorBrush x:Key="CardBrush"         Color="#FFFFFF"/>   <!-- карточки, таблицы -->
+    <SolidColorBrush x:Key="InputBrush"        Color="#FFFFFF"/>   <!-- поля ввода -->
+    <SolidColorBrush x:Key="HeaderBrush"       Color="#1F3B2D"/>   <!-- верхняя панель, шапка таблиц -->
+    <SolidColorBrush x:Key="HeaderTextBrush"   Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="PrimaryBrush"      Color="#25894D"/>   <!-- основной цвет: кнопки, акценты -->
+    <SolidColorBrush x:Key="ButtonTextBrush"   Color="#FFFFFF"/>   <!-- текст на кнопках -->
+    <SolidColorBrush x:Key="AccentBrush"       Color="#A8DDB5"/>   <!-- верх карточки техники -->
+    <SolidColorBrush x:Key="TextBrush"         Color="#1F3B2D"/>   <!-- основной текст -->
+    <SolidColorBrush x:Key="MutedBrush"        Color="#7A8A80"/>   <!-- подсказки, второстепенный текст -->
+    <SolidColorBrush x:Key="BorderBrush"       Color="#C9DCCC"/>   <!-- рамки полей -->
+    <SolidColorBrush x:Key="AltRowBrush"       Color="#F4F9F4"/>   <!-- чередующиеся строки таблицы -->
+    <SolidColorBrush x:Key="HoverBrush"        Color="#D5EFDC"/>   <!-- строка таблицы под курсором -->
+    <SolidColorBrush x:Key="DangerBrush"       Color="#D93A2B"/>   <!-- удаление, ошибки, капча -->
+
+    <!-- Цвет выделения (строка таблицы, пункт списка) вместо стандартного синего Windows -->
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"                    Color="#D5EFDC"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"                Color="#1F3B2D"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"     Color="#D5EFDC"/>
+    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#1F3B2D"/>
+</ResourceDictionary>
